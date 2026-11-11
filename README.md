@@ -79,11 +79,6 @@ Open http://localhost:5000. The database `vesit.db` is created automatically on 
 4. Watch the student appear as present on the admin page
 5. Approve the certificate, then open it from the student dashboard
 
-## Screenshots
-
-Add images to the `screenshots/` folder and link them here:
-
-`![Home](screenshots/home.png)`
 
 ## Future scope
 
