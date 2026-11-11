@@ -53,23 +53,6 @@ vesit_events/
 - A certificate references an attendance record and starts as `pending` until an admin approves it
 - Foreign keys, `UNIQUE` and `CHECK` constraints keep the data consistent
 
-## Getting started
-
-```bash
-git clone https://github.com/<your-username>/vesit-events.git
-cd vesit-events
-python -m venv venv
-venv\Scripts\activate          # Windows
-source venv/bin/activate       # macOS / Linux
-pip install -r requirements.txt
-python app.py
-```
-
-Open http://localhost:5000. The database `vesit.db` is created automatically on first run.
-
-**Optional settings** (environment variables): `SECRET_KEY`, `ADMIN_CODE` (default `VESIT-ADMIN`).
-
-**Using QR scanning on phones:** run the app on a laptop, connect the phone to the same Wi-Fi, and open the site with the laptop's IP (for example `http://192.168.1.5:5000`) so the QR code points to an address the phone can reach.
 
 ## Demo flow
 
@@ -92,4 +75,6 @@ Open http://localhost:5000. The database `vesit.db` is created automatically on 
 ## Team
 
 Software Engineering Micro-project, VESIT.
-Add team member names here.
+66 - Khyati Keswani
+68 - Jeegnasa Makwana
+69 - Leena Chavan
