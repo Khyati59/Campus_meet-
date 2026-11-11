@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block body %}<div class="card" style="max-width:640px;margin:auto"><h2>Publish a new event</h2>
+<form method="post" enctype="multipart/form-data" class="stack">
+<label for="t">Event title</label><input id="t" name="title" required>
+<label for="b">Event banner (PNG or JPG, up to 5 MB)</label><input id="b" type="file" name="banner" accept="image/png,image/jpeg,image/webp">
+<label for="c">Category</label><select id="c" name="category_id">{% for c in categories %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}</select>
+<label for="d">Description</label><textarea id="d" name="description" rows="4"></textarea>
+<label for="v">Venue</label><input id="v" name="venue" required>
+<label for="s">Date and time</label><input id="s" type="datetime-local" name="start_time" required>
+<label for="k">Seats available</label><input id="k" type="number" name="capacity" value="100" min="1">
+<p><button class="btn dark">Publish event</button> <a class="btn ghost" href="{{ url_for('admin') }}">Cancel</a></p></form></div>{% endblock %}

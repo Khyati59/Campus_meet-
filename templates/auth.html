@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block body %}<div class="card" style="max-width:480px;margin:1rem auto">
+<h2>{{ 'Create' if mode=='signup' else 'Log in to' }} {{ role }} account</h2>
+<form method="post" class="stack">
+{% if mode=='signup' %}<label for="n">Full name</label><input id="n" name="name" required>{% endif %}
+<label for="e">College email</label><input id="e" type="email" name="email" required>
+<label for="p">Password</label><input id="p" type="password" name="password" required minlength="4">
+{% if mode=='signup' %}<label for="d">Department</label><select id="d" name="department_id" required>
+{% for d in departments %}<option value="{{ d.id }}">{{ d.name }}</option>{% endfor %}</select>
+{% if role=='student' %}<label for="r">Roll number</label><input id="r" name="roll_no" required>
+<label for="y">Year</label><select id="y" name="year"><option>1</option><option>2</option><option>3</option><option>4</option></select>{% endif %}
+{% if role=='admin' %}<label for="c">Admin access code</label><input id="c" name="code" required>
+<small class="mute">Demo code: {{ admin_code }} (set in app.py)</small>{% endif %}{% endif %}
+<p><button class="btn dark">{{ 'Create account' if mode=='signup' else 'Log in' }}</button></p></form>
+{% if mode=='signup' %}<a href="{{ url_for('login', role=role) }}">Already registered? Log in</a>
+{% else %}<a href="{{ url_for('signup', role=role) }}">New here? Create an account</a>{% endif %}</div>{% endblock %}

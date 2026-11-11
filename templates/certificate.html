@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Certificate{% endblock %}{% block body %}
+<div class="cert"><img class="logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="VES logo">
+<p class="mute" style="margin:0">Vivekanand Education Society's Institute of Technology, Mumbai</p>
+<h1>CERTIFICATE</h1><p style="letter-spacing:.3em">OF PARTICIPATION</p><p>This is to certify that</p>
+<div class="who">{{ c.student }}</div>
+<p>{% if c.roll_no %}Roll No. {{ c.roll_no }}, {% endif %}{{ c.dept or 'VESIT' }}, has successfully participated in</p>
+<h2 style="font-size:1.8rem;margin-top:.4rem">{{ c.title }}</h2>
+<p>held at {{ c.venue }} on {{ c.start_time|fmt }}.</p>
+<div class="sig"><div>{{ c.organizer }}<br>Event Coordinator</div><img src="{{ url_for('verify_qr', code=c.verify_code) }}" alt="Verification QR"><div>Principal<br>VESIT</div></div>
+<p class="no">Certificate ID: {{ c.verify_code }} · Verify by scanning the QR code</p></div>
+<p class="noprint" style="text-align:center"><button class="btn" onclick="window.print()">Print or save as PDF</button></p>{% endblock %}

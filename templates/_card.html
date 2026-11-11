@@ -1,0 +1,2 @@
+<div class="img">{% if e.banner %}<img src="{{ url_for('static', filename='uploads/' ~ e.banner) }}" alt="{{ e.title }} banner">{% else %}{{ e.title[0] }}{% endif %}
+<div class="date">{{ e.start_time|day }}<small>{{ e.start_time|mon }}</small></div></div>

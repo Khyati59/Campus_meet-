@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block hero %}<div class="band"><div><h2>Welcome, {{ session.name }}</h2><p>Find an event, register, then scan its QR code at the venue.</p></div></div>{% endblock %}
+{% block body %}<div class="stats"><div class="stat"><b>{{ mine.reg }}</b><span>Events registered</span></div>
+<div class="stat"><b>{{ mine.att }}</b><span>Events attended</span></div><div class="stat"><b>{{ mine.certs }}</b><span>Certificates earned</span></div></div>
+<form class="card row" method="post" action="{{ url_for('attend_code') }}"><span><strong>QR not scanning?</strong> Enter the event code:</span>
+<span style="display:flex;gap:.5rem"><input name="code" aria-label="Event code" required style="width:150px"><button class="btn dark">Mark attendance</button></span></form>
+<div class="chips"><a href="{{ url_for('student') }}" class="{{ '' if cat else 'on' }}">All events</a>
+{% for c in categories %}<a href="{{ url_for('student', cat=c.name) }}" class="{{ 'on' if cat==c.name else '' }}">{{ c.name }}</a>{% endfor %}</div>
+{% if not events %}<div class="card mute">No events in this category yet.</div>{% endif %}
+<div class="grid">{% for e in events %}<div class="ev">{% include "_card.html" %}<div class="body"><span class="tag">{{ e.category }}</span><h3>{{ e.title }}</h3>
+<p class="mute">{{ e.start_time|fmt }} · {{ e.venue }}</p><p>{{ e.description }}</p><p class="mute">{{ e.capacity - e.taken }} seats left</p>
+<div class="act">{% if e.marked_at %}<span class="tag ok">Attended</span>
+{% if e.cstatus == 'approved' %}<a class="btn sm" href="{{ url_for('certificate', cid=e.ceid) }}">View certificate</a>{% else %}<span class="tag wait">Certificate awaiting approval</span>{% endif %}
+{% elif e.rid %}<span class="tag">Registered</span><small class="mute">Scan the QR at the venue</small>
+{% elif e.taken >= e.capacity %}<span class="tag">Full</span>
+{% else %}<form method="post" action="{{ url_for('register', eid=e.id) }}"><button class="btn sm">Register</button></form>{% endif %}</div></div></div>{% endfor %}</div>{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block head %}<meta http-equiv="refresh" content="15">{% endblock %}
+{% block body %}<a href="{{ url_for('admin') }}">Back to dashboard</a>
+<div class="row"><div><h2>{{ e.title }}</h2><span class="tag">{{ e.category }}</span> <span class="mute">{{ e.start_time|fmt }} · {{ e.venue }}</span></div>
+<form method="post" action="{{ url_for('delete_event', eid=e.id) }}" onsubmit="return confirm('Delete this event and all its records?')"><button class="btn danger sm">Delete event</button></form></div>
+<div class="split"><div class="card qr"><h3>Attendance QR code</h3><img src="{{ url_for('qr_png', eid=e.id) }}" alt="Attendance QR code">
+<p>Backup code: <strong>{{ e.qr_token }}</strong></p><button class="btn ghost sm noprint" onclick="window.print()">Print QR</button></div>
+<div class="card"><h3>{{ present }} of {{ regs|length }} present</h3><p class="mute">Updates every 15 seconds.</p>
+<p><a class="btn dark sm" href="{{ url_for('export', eid=e.id) }}">Download CSV</a></p>
+{% if pending %}<form method="post" action="{{ url_for('approve', eid=e.id) }}"><button class="btn">Approve all {{ pending }} pending certificates</button></form>{% endif %}</div></div>
+<div class="card"><h3>Registered students</h3>{% if regs %}<table><tr><th>Name</th><th>Roll no</th><th>Attendance</th><th>Certificate</th></tr>
+{% for r in regs %}<tr><td>{{ r.name }}<br><small class="mute">{{ r.email }}</small></td><td>{{ r.roll_no or '-' }}</td>
+<td>{% if r.marked_at %}<span class="tag ok">Present {{ r.marked_at[11:16] }}</span>{% else %}<span class="tag">Not yet</span>{% endif %}</td>
+<td>{% if r.status == 'approved' %}<span class="tag ok">Approved</span>{% elif r.status == 'pending' %}
+<form method="post" action="{{ url_for('approve', eid=e.id) }}"><input type="hidden" name="cid" value="{{ r.cid }}"><button class="btn sm">Approve</button></form>{% else %}-{% endif %}</td></tr>{% endfor %}</table>
+{% else %}<p class="mute">No one has registered yet.</p>{% endif %}</div>{% endblock %}

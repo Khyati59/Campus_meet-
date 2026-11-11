@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}VESIT Events{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">{% block head %}{% endblock %}</head><body>
+<header class="top"><a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Vivekanand Education Society's Institute of Technology"></a>
+<div class="t"><h1>VESIT Events</h1><small>Event registration, attendance and certificates</small></div></header>
+<nav><div><a href="/">Home</a>{% if session.role %}<a href="{{ url_for(session.role) }}">Dashboard</a>{% endif %}</div>
+<div>{% if session.role %}<span>{{ session.name }} · {{ session.role }}</span><a href="{{ url_for('logout') }}">Log out</a>
+{% else %}<a href="{{ url_for('login', role='student') }}">Student login</a><a href="{{ url_for('login', role='admin') }}">Admin login</a>{% endif %}</div></nav>
+{% block hero %}{% endblock %}
+<main>{% for c, m in get_flashed_messages(with_categories=true) %}<div class="flash {{ c }}">{{ m }}</div>{% endfor %}{% block body %}{% endblock %}</main>
+<footer>Vivekanand Education Society's Institute of Technology, Chembur, Mumbai · VESIT Events</footer></body></html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block hero %}<section class="hero"><div><h1>Discover, join and attend events at VESIT.</h1>
+<p>Register for technical fests, workshops and cultural events, mark attendance with a QR scan and collect verified certificates.</p>
+<a class="btn" href="{{ url_for('signup', role='student') }}">Student signup</a>
+<a class="btn ghost" href="{{ url_for('signup', role='admin') }}">Organizer signup</a></div></section>{% endblock %}
+{% block body %}<div class="stats"><div class="stat"><b>{{ stats[0] }}</b><span>Events hosted</span></div>
+<div class="stat"><b>{{ stats[1] }}</b><span>Students enrolled</span></div><div class="stat"><b>{{ stats[2] }}</b><span>Certificates issued</span></div></div>
+<h2>Upcoming events</h2>{% if not upcoming %}<div class="card mute">No events yet. Organizers can publish the first one after logging in.</div>{% endif %}
+<div class="grid">{% for e in upcoming %}<div class="ev">{% include "_card.html" %}<div class="body"><span class="tag">{{ e.category }}</span>
+<h3>{{ e.title }}</h3><p class="mute">{{ e.start_time|fmt }} · {{ e.venue }}</p></div></div>{% endfor %}</div>{% endblock %}

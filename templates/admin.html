@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block hero %}<div class="band"><div><h2>Organizer dashboard</h2><p>Welcome, {{ session.name }}. Manage your events and certificates.</p></div></div>{% endblock %}
+{% block body %}<div class="stats"><div class="stat"><b>{{ events|length }}</b><span>Events created</span></div>
+<div class="stat"><b>{{ total_reg }}</b><span>Registrations</span></div><div class="stat"><b>{{ total_att }}</b><span>Attendance marked</span></div>
+<div class="stat"><b>{{ pending }}</b><span>Certificates awaiting approval</span></div></div>
+<div class="row"><h2>Your events</h2><a class="btn" href="{{ url_for('new_event') }}">Publish new event</a></div>
+{% if not events %}<div class="card mute">You have not published any events. Create one to get its QR code.</div>{% endif %}
+<div class="grid">{% for e in events %}<div class="ev">{% include "_card.html" %}<div class="body"><span class="tag">{{ e.category }}</span><h3>{{ e.title }}</h3>
+<p class="mute">{{ e.start_time|fmt }} · {{ e.venue }}</p><p>{{ e.reg }}/{{ e.capacity }} registered · {{ e.att }} present</p>
+<div class="act"><a class="btn dark sm" href="{{ url_for('admin_event', eid=e.id) }}">QR, attendance and certificates</a></div></div></div>{% endfor %}</div>{% endblock %}
