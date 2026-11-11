@@ -75,6 +75,9 @@ vesit_events/
 ## Team
 
 Software Engineering Micro-project, VESIT.
+
 66 - Khyati Keswani
+
 68 - Jeegnasa Makwana
+
 69 - Leena Chavan
