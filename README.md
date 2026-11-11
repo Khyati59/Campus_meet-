@@ -1,6 +1,6 @@
-# VESIT Events: Smart Event Management System
+# CampusMeet: Smart Event Management System
 
-A web-based system that helps a college create and manage events. Students register for events, mark attendance by scanning a QR code, and receive certificates that the organizer approves first. Built as a Software Engineering micro-project.
+A web-based system that helps our college create and manage events. Students register for events, mark attendance by scanning a QR code, and receive certificates that the organizer approves first. Built as a Software Engineering micro-project.
 
 ## Features
 
